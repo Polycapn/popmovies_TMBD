@@ -2,20 +2,19 @@ package persistence
 
 import androidx.lifecycle.LiveData
 import persistence.model.MovieModel
-import persistence.model.PopularMovies
 import javax.inject.Inject
 
 class Database @Inject constructor(
     private val moviesDao: MoviesDao
-) : DataSourceForRepo {
+) : MoviesDataSource {
 
     override fun saveAllPopularMovies(popularMovies: List<MovieModel>) {
         popularMovies.forEach {
-            moviesDao.insertAllPopularMovies(it)
+            moviesDao.insertPopularMovie(it)
         }
     }
 
-    override fun getAllPopularMovies(): LiveData<List<PopularMovies>> {
+    override fun getAllPopularMovies(): LiveData<List<MovieModel>> {
         return moviesDao.getAllPopularMovies()
     }
 

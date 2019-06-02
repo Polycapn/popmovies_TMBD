@@ -2,9 +2,9 @@ package persistence
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import persistence.model.PopularMovies
+import persistence.model.MovieModel
 
-@Database(entities = [PopularMovies::class], version = 1)
-abstract class MoviesRoomDB : RoomDatabase(){
-
+@Database(entities = [MovieModel::class], version = 1)
+abstract class MoviesRoomDB : RoomDatabase() {
+    abstract fun moviesDao(): MoviesDao
 }
