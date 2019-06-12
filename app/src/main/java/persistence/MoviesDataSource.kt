@@ -5,5 +5,5 @@ import persistence.model.MovieModel
 
 interface MoviesDataSource {
     fun getAllPopularMovies(): LiveData<List<MovieModel>>
-    fun saveAllPopularMovies(popularMovies: List<MovieModel>)
+    fun saveAllPopularMovies(popularMoviesJson: String)
 }
