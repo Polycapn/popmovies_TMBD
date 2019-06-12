@@ -7,19 +7,19 @@ import androidx.lifecycle.Transformations
 import com.google.gson.Gson
 import persistence.model.MovieModel
 import persistence.model.MoviesResponse
-import javax.inject.Inject
+import persistence.model.RawMoviesData
 
-class Database @Inject constructor(
+class Database constructor(
     private val moviesDao: MoviesDao
 ) : MoviesDataSource {
 
     override fun saveAllPopularMovies(popularMoviesJson: String) {
-        moviesDao.insertPopularMovie(popularMoviesJson)
+        moviesDao.insertPopularMovie(RawMoviesData(popularMoviesJson))
     }
 
     override fun getAllPopularMovies(): LiveData<List<MovieModel>> {
-        return Transformations.switchMap(moviesDao.getAllPopularMovies()) { responseJson ->
-            val moviesResponse = Gson().fromJson<MoviesResponse>(responseJson, MoviesResponse::class.java)
+        return Transformations.switchMap(moviesDao.getAllPopularMovies()) { rawMoviesData ->
+            val moviesResponse = Gson().fromJson<MoviesResponse>(rawMoviesData.responseJson, MoviesResponse::class.java)
             val moviesList = moviesResponse.results
             val mutableLiveData = MutableLiveData<List<MovieModel>>()
             mutableLiveData.value = moviesList
