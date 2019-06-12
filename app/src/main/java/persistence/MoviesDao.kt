@@ -5,13 +5,12 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import persistence.model.MovieModel
 
 @Dao
 interface MoviesDao {
     @Query("SELECT * FROM Movies")
-    fun getAllPopularMovies(): LiveData<List<MovieModel>>
+    fun getAllPopularMovies(): LiveData<String>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPopularMovie(movie: MovieModel)
+    fun insertPopularMovie(moviesJson: String)
 }
