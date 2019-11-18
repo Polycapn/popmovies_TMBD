@@ -1,11 +1,11 @@
-package persistence
+package com.example.popmovies_tmbd.api.persistence
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import persistence.model.RawMoviesData
+import com.example.popmovies_tmbd.api.persistence.model.RawMoviesData
 
 @Dao
 interface MoviesDao {

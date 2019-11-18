@@ -1,10 +1,11 @@
-package persistence.model
+package com.example.popmovies_tmbd.api.persistence.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-data class MovieModel(
+data class
+MovieModel(
     @PrimaryKey
     val original_title: String,
     val overview: String,

@@ -4,20 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
 
 
-def getProperty(String filename, String propName) {
-    def propsFile = rootProject.file(filename)
-    if (propsFile.exists()) {
-        def props = new Properties()
-        props.load(new FileInputStream(propsFile))
-        if (props[propName] != null) {
-            return props[propName]
-        } else {
-            print("No such property " + propName + " in file " + filename)
-        }
-    } else {
-        print(filename + " does not exist!")
-    }
-}
 
 android {
     compileSdkVersion 28
@@ -28,7 +14,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "TMDB_API_KEY", "\"${getProperty("local.properties", "tmdb_api_key")}\""
+        buildConfigField "String", "API_BASE_URL", '"https://api.themoviedb.org/"'
+        buildConfigField "String", "API_KEY", '"api_key=f560a46ebc27487c987ab7994303a29a"'
 
     }
     buildTypes {
@@ -63,6 +50,8 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:2.5.0"
     implementation "com.google.code.gson:gson:2.8.5"
     testImplementation "com.squareup.okhttp3:mockwebserver:$okhttp_version"
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
 
     // glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
@@ -85,8 +74,9 @@ dependencies {
 
 
     //testing
-    testImplementation "junit:junit:4.13-beta-3"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1"
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'androidx.arch.core:core-testing:2.1.0-beta01'
     testImplementation "io.mockk:mockk:1.9.3"
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

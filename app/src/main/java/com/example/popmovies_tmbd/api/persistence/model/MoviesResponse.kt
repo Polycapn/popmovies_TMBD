@@ -1,8 +1,8 @@
-package persistence.model
+package com.example.popmovies_tmbd.api.persistence.model
 
 data class MoviesResponse(
     val page: Int,
-    val results: List<MovieModel>,
+    var results: List<MovieModel>,
     val total_pages: Int,
     val total_results: Int
 )
